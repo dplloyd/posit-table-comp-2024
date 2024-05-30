@@ -137,7 +137,7 @@ spfl_totals <- spfl |>
 
 spfl |> count(team)
 
-clubs <- unique(df$HomeTeam)
+clubs <- unique(df$home_team)
 
 ### STICKING THINGS TOGETHER
 # Building a wide table
@@ -146,5 +146,8 @@ spfl_table <- spfl_totals |>
   left_join(wld_points) |> 
   left_join(swing_counts) |> 
   left_join(location_wins_counts)
+
+
+
 
 
