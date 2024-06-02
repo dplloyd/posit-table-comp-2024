@@ -112,6 +112,48 @@ wld_points <- df |>
   pivot_wider(names_from = location, values_from = total_points, names_glue = "{location}_points" ) |> 
   mutate(total_points = away_points + home_points)
 
+wld_count <- df |>
+  select(home_team, away_team, fulltime_result) |>
+  pivot_longer(
+    cols = away_team:home_team,
+    # Select all columns to pivot
+    names_to = c("location", "var"),
+    # New variable names for parts of the original names
+    names_sep = "_",
+    values_to = "team"
+  ) |>
+  
+  group_by(team) |>
+  summarise(
+    n_win = sum(
+      (fulltime_result == "H" &
+         location == "home") |
+        fulltime_result == "A" & location == "away"
+    ),
+    n_draw = sum(fulltime_result == "D"),
+    n_loss = sum(
+      (fulltime_result == "H" &
+         location == "away") |
+        fulltime_result == "A" & location == "home"
+    )
+  ) 
+
+
+# WLD lists for fancy sparklines
+wld_sparks <- df |> 
+  select(date, time,team_home = home_team, team_away = away_team, fulltime_result) |> 
+pivot_longer(contains('team'), names_to = 'home_away', values_to = 'team', names_prefix = 'team_') |> 
+  mutate(
+  result = case_when(home_away == 'home' & fulltime_result == "H" ~ 1,
+                     home_away == 'away' & fulltime_result == "A" ~  1,
+                     fulltime_result == "D" ~  0.5,
+                     TRUE ~  -0)) |> 
+  mutate(date = as.Date(date, "%d/%m/%Y")) |> 
+  arrange(date) |> 
+  group_by(team) |> 
+  summarise(outcomes = list(result),.groups = "drop")
+
+
 ### TEAM FORTRESS 2: Who wins most at home and away?
 # Percentage of home games won
 
@@ -139,13 +181,33 @@ spfl |> count(team)
 
 clubs <- unique(df$home_team)
 
+
+# GET THE LOGOS 
+
+source("get_team_logos.R")
+
 ### STICKING THINGS TOGETHER
 # Building a wide table
 
 spfl_table <- spfl_totals |> 
   left_join(wld_points) |> 
+  left_join(wld_count) |> 
+  left_join(wld_sparks) |> 
   left_join(swing_counts) |> 
-  left_join(location_wins_counts)
+  left_join(location_wins_counts) |> 
+  left_join(logos)
+
+
+### CALCULATE PROPORTIONS
+
+# Proportion of points won from draw and wins
+
+spfl_table <- spfl_table |> 
+  mutate(prop_point_win = n_win / (n_win + n_draw + n_loss),
+         prop_point_draw = n_draw / (n_win + n_draw + n_loss),
+         prop_point_loss = n_loss / (n_win + n_draw + n_loss)) 
+
+
 
 
 
