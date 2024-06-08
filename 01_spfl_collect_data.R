@@ -169,6 +169,24 @@ location_wins_counts <- df |>
   pivot_wider(names_from = win_location, values_from = n)
 
 
+
+### FINAL TABLE POSITIONS
+# Can't use final point due to the table split
+team_position <- tibble(team = team, position =
+         case_when(team == "Celtic" ~ 1,
+                   team == "Dundee" ~ 6,
+                   team == "Livingston" ~ 12 ,
+                   team == "St Johnstone" ~ 10,
+                   team == "Kilmarnock" ~ 4,
+                   team == "Hibernian" ~ 8,
+                   team == "Rangers" ~ 2,
+                   team == "Ross County" ~ 11,
+                   team == "St Mirren" ~ 5,
+                   team == "Aberdeen" ~ 7,
+                   team == "Hearts" ~ 3,
+                   team == "Motherwell" ~ 9 
+         ) )
+
 ### AGGREGATE STATS ----
 # We sum up over our variables
 
@@ -195,7 +213,8 @@ spfl_table <- spfl_totals |>
   left_join(wld_sparks) |> 
   left_join(swing_counts) |> 
   left_join(location_wins_counts) |> 
-  left_join(logos)
+  left_join(logos) |> 
+  left_join(team_position)
 
 
 ### CALCULATE PROPORTIONS
@@ -203,9 +222,16 @@ spfl_table <- spfl_totals |>
 # Proportion of points won from draw and wins
 
 spfl_table <- spfl_table |> 
-  mutate(prop_point_win = n_win / (n_win + n_draw + n_loss),
-         prop_point_draw = n_draw / (n_win + n_draw + n_loss),
-         prop_point_loss = n_loss / (n_win + n_draw + n_loss)) 
+  mutate(prop_games_win = n_win / (n_win + n_draw + n_loss),
+         prop_games_draw = n_draw / (n_win + n_draw + n_loss),
+         prop_games_loss = n_loss / (n_win + n_draw + n_loss)) |> 
+
+rowwise() |> 
+  mutate(
+         
+         prop_games_list = list(c(prop_games_win, prop_games_draw, prop_games_loss))
+         
+         ) 
 
 
 
