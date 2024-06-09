@@ -1,0 +1,4 @@
+- source: posit-2024-table-comp.qmd
+  quarto-pub:
+    - id: 4b8e54ab-35f9-4174-b5ef-b56a9b1097b6
+      url: 'https://diarmuid.quarto.pub/2024-posit-table-competition-entry'
