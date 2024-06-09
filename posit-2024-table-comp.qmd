@@ -61,7 +61,7 @@ The [accompanying notes](https://www.football-data.co.uk/notes.txt) provide full
 
 ## Table
 
-My table is built in `gt` and `gtExtra`. I relied heavily on the latter's help files, and [Albert Rapp's](https://gt.albert-rapp.de) tutorial on creating plots within table cells. My tables to date have always been quite vanilla, and I wanted to explore how sparklines and other in-cell plots can help summarise tabular data. While I didn't exploit the functionality of embedding `ggplot2` objects in cells, I think that route would help for future iterations, and exploring other variables to summarise.
+The is built in `gt` and `gtExtra`. I relied heavily on the latter's help files, and [Albert Rapp's](https://gt.albert-rapp.de) tutorial on creating plots within table cells, and I particularly wanted to explore how sparklines and other in-cell plots can help summarise tabular data. While I didn't exploit the functionality of embedding `ggplot2` objects in cells, I think that route would help for future iterations, and exploring other variables to summarise.
 
 ```{r}
 final_table
