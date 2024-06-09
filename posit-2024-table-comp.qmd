@@ -1,0 +1,68 @@
+---
+title: "2024 Posit Table Competition Entry"
+author: "Diarmuid Lloyd"
+format: 
+ html:
+     page-layout: full
+editor: visual
+execute: 
+  warning: false
+  message: false
+  echo: true
+---
+
+##  🏴󠁧󠁢󠁳󠁣󠁴󠁿 ⚽️ Introduction
+
+My entry is a summary of selected statistics of the top-flight league of professional Scottish football, the Scottish Premiership during the 2023-24 season.
+
+The table is built from three scripts run in sequence, although the first can be skipped after the first run:
+
+1.  `0_collect_timeseries.R`: Collecting time series data back to the 2000-01 season.
+
+2.  `01_spfl_collect_data.R`: Wrangling the data, and calculating summary statistics
+
+3.   `02_build_table_gt.R`: Building the table
+
+[The repo with these scripts can be found here.](https://github.com/dplloyd/posit-table-comp-2024)
+
+```{r}
+
+library(tidyverse)
+
+source("0_collect_timeseries.R")
+
+source("01_spfl_collect_data.R")
+
+source("02_build_table_gt.R")
+```
+
+## Data source
+
+Data are sourced from [https://www.football-data.co.uk/scotlandm.php](https://www.football-data.co.uk). While no specific licence is provided on the website, the maintainers state:
+
+> You are free experiment with the data yourselves, but if you are looking for a bespoke Excel application that has been desinged specifically to work with Football-Data's files, visit  [BetGPS](http://www.betgps.com/betting-data.php) for an exceptional data analysis workbook. Like all of Football-Data's files, it free to download.
+
+The [accompanying notes](https://www.football-data.co.uk/notes.txt) provide full sources for the data, but are summarised as:
+
+> ```         
+> Current results (full time, half time)
+> XScores - http://www.xscores .com
+>
+> Match statistics
+> BBC, ESPN Soccer, Bundesliga.de, Gazzetta.it and Football.fr
+>
+> Bookmakers betting odds
+> Individual bookmakers
+>
+> Betting odds for weekend games are collected Friday afternoons, and on Tuesday afternoons for midweek games.
+>
+> Additional match statistics (corners, shots, bookings, referee etc.) for the 2000/01 and 2001/02 seasons for the English, Scottish and German leagues were provided by Sports.com (now under new ownership and no longer available).
+> ```
+
+## Table
+
+My table is built in `gt` and `gtExtra`. I relied heavily on the latter's help files, and [Albert Rapp's](https://gt.albert-rapp.de) tutorial on creating plots within table cells. My tables to date have always been quite vanilla, and I wanted to explore how sparklines and other in-cell plots can help summarise tabular data. While I didn't exploit the functionality of embedding `ggplot2` objects in cells, I think that route would help for future iterations, and exploring other variables to summarise.
+
+```{r}
+final_table
+```
