@@ -105,7 +105,7 @@ final_table <- spfl_table_gt |>
   tab_source_note(source_note = html("<b>NOTES</b><br>Data are from https://www.football-data.co.uk.<br> The Scottish Premiership splits into equal-sized top and bottom groups after 33 matches. The remaining five matches played by each team are all within their respective group. As such, a team can finish with more points than another team with a better overall table placement.") ) |> 
   
   tab_footnote(
-    footnote = "The vertical line is the median matches won per season between 2000-01 and 2023-24, for each season the team was in the Premiership.",
+    footnote = "The vertical lines are the median matches won per season between 2000-01 and 2023-24, for each season the relevant team was in the Premiership. While the Premiership formed its current iteration in 2013 following a merger between the Scottish Premier League and the Scottish Football League, twelve teams have competed in the top-flight since 2000-01.",
     locations = cells_column_labels(columns = n_win)
   )
   
