@@ -1,7 +1,8 @@
 # Script downloads and saves data back to 2000-01 season.
 
-data_sources <- tibble(year_short = c("2324","2223","2122","2021","1920","1819","1718","1617","1516","1415","1314","1213","1112","1011","0910","0809","0708","0607","0506","0405","0304","0203","0102","0001"),
-              data_url = glue::glue("https://www.football-data.co.uk/mmz4281/{year_short}/SC0.csv"),
+data_sources <- tibble(year_short = c("23-24","22-23","21-22","20-21","19-20","18-19","17-18","16-17","15-16","14-15","13-14","12-13","11-12","10-11","09-10","08-09","07-08","06-07","05-06","04-05","03-04","02-03","01-02","00-01"),
+                       year_url = str_remove(year_short,"-"),
+              data_url = glue::glue("https://www.football-data.co.uk/mmz4281/{year_url}/SC0.csv"),
               source = as.character( seq(1,24)) )
 
 ts_df <- map_dfr(data_sources$data_url, ~readr::read_csv(.x) |> select(Div:AR), .id = "source") |> 
