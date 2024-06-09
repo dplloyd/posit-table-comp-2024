@@ -13,7 +13,7 @@ execute:
 
 ##  🏴󠁧󠁢󠁳󠁣󠁴󠁿 ⚽️ Introduction
 
-My entry is a summary of selected statistics of the top-flight league of professional Scottish football, the Scottish Premiership during the 2023-24 season.
+Selected 2023-24 statistics of the top-flight league of professional Scottish football, the Scottish Premiership.
 
 The table is built from three scripts run in sequence, although the first can be skipped after the first run:
 
