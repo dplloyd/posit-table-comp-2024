@@ -3,7 +3,6 @@
 library(gt)
 library(gtExtras)
 
-source("01_spfl_collect_data.R")
 
 spfl_table_gt <-
   spfl_table |>
@@ -23,7 +22,7 @@ spfl_table_gt <-
 
 
 # Subtitle
-subtitle <- html("This table shows the final league position of football clubs competing in the 2023-24 Scottish Premiership, with some selected aggregate statistics, such as goals scored, and first to second half swings.<br><br>The division was formed in 2013, and constitutes 12 teams, each who play 38 matches. Rangers and Celtic generally dominate the division owing to superior resources. ")
+subtitle <- html("This table shows the final league position of football clubs competing in the 2023-24 Scottish Premiership, with selected season statistics, such as goals scored, penalty cards received and  matches won.<br><br>The division was formed in 2013 and constitutes 12 teams, each of which play 38 matches. Rangers and Celtic generally dominate the division owing to superior resources.")
 
 
 
@@ -83,8 +82,8 @@ final_table <- spfl_table_gt |>
     url = "",
     team = "Club",
     total_points = "Points",
-    game_lost_FT_from_non_losing_HT = "FT losses from non-losing HT",
-    game_won_FT_from_non_win_HT = "FT wins from losing HT",
+    game_lost_FT_from_non_losing_HT = "non-losing HT → FT loss",
+    game_won_FT_from_non_win_HT = "non-win HT → FT win",
     outcomes = "Match outcomes",
     n_win = "Matches won relative to previous seasons"
   ) |> 
@@ -94,7 +93,7 @@ final_table <- spfl_table_gt |>
   
   tab_spanner(label = "Penalty cards received which were...", columns = fouls_yellow_red) |> 
   
-  tab_spanner(label = "Swing between HT and FT results", columns = game_lost_FT_from_non_losing_HT:game_won_FT_from_non_win_HT) |> 
+  tab_spanner(label = "Swing: Changes between half-time and full-time results", columns = game_lost_FT_from_non_losing_HT:game_won_FT_from_non_win_HT) |> 
   
   
   
@@ -105,7 +104,7 @@ final_table <- spfl_table_gt |>
   tab_source_note(source_note = html("<b>Data:</b> https://www.football-data.co.uk | <b>Table:</b> @dplloyd<br><br><b>Notes</b><br> The Scottish Premiership splits into equal-sized top and bottom groups after 33 matches. The remaining five matches played by each team are all within their respective group. As such, a team can finish with more points than another team with a better overall table placement.<br>") ) |> 
   
   tab_footnote(
-    footnote = "The vertical lines are the median matches won per season between 2000-01 and 2023-24, for each season the relevant team was in the Premiership. While the Premiership formed its current iteration in 2013 following a merger between the Scottish Premier League and the Scottish Football League, twelve teams have competed in the top-flight since 2000-01.",
+    footnote = "Vertical lines are median matches won per season between 2000-01 and 2023-24, for each season the relevant team was in the Premiership. While the Premiership formed its current iteration in 2013 following a merger between the Scottish Premier League and the Scottish Football League, twelve teams have competed in the top-flight since 2000-01.",
     locations = cells_column_labels(columns = n_win)
   )
   

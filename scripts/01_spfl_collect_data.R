@@ -216,7 +216,7 @@ spfl |> count(team)
 
 # GET THE LOGOS 
 
-source("get_team_logos.R")
+source("scripts/get_team_logos.R")
 
 ### STICKING THINGS TOGETHER
 # Building a wide table
