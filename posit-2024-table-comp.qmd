@@ -29,11 +29,11 @@ The table is built from three scripts run in sequence, although the first can be
 
 library(tidyverse)
 
-source("0_collect_timeseries.R")
+source("scripts/0_collect_timeseries.R")
 
-source("01_spfl_collect_data.R")
+source("scripts/01_spfl_collect_data.R")
 
-source("02_build_table_gt.R")
+source("scripts/02_build_table_gt.R")
 ```
 
 ## Data source
