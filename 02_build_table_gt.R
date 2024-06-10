@@ -21,9 +21,9 @@ spfl_table_gt <-
   ) |> 
   arrange(position)
 
-# Ideas
-# win/loss/draw sparkline
-# Distribution of points from WLD
+
+# Subtitle
+subtitle <- html("This table shows the final league position of football clubs competing in the 2023-24 Scottish Premiership, with some selected aggregate statistics, such as goals scored, and first to second half swings.<br><br>The division was formed in 2013, and constitutes 12 teams, each who play 38 matches. Rangers and Celtic generally dominate the division owing to superior resources. ")
 
 
 
@@ -70,12 +70,12 @@ final_table <- spfl_table_gt |>
   
 
   tab_header(
-    title = gtExtras::add_text_img(
-      "2023–24 Scottish Premiership",
+    title = gtExtras::add_text_img(html(
+      "<b>2023–24 Scottish Premiership</b>"),
       url = "https://upload.wikimedia.org/wikipedia/en/a/a1/Cinch_premiership.png",
       height = 30
     ),
-    subtitle = "A season in numbers"
+    subtitle = subtitle
   ) |> 
   
   cols_label(
@@ -102,7 +102,7 @@ final_table <- spfl_table_gt |>
   
   opt_align_table_header(align = "left") |> 
 
-  tab_source_note(source_note = html("<b>NOTES</b><br>Data are from https://www.football-data.co.uk.<br> The Scottish Premiership splits into equal-sized top and bottom groups after 33 matches. The remaining five matches played by each team are all within their respective group. As such, a team can finish with more points than another team with a better overall table placement.") ) |> 
+  tab_source_note(source_note = html("<b>Data:</b> https://www.football-data.co.uk | <b>Table:</b> @dplloyd<br><br><b>Notes</b><br> The Scottish Premiership splits into equal-sized top and bottom groups after 33 matches. The remaining five matches played by each team are all within their respective group. As such, a team can finish with more points than another team with a better overall table placement.<br>") ) |> 
   
   tab_footnote(
     footnote = "The vertical lines are the median matches won per season between 2000-01 and 2023-24, for each season the relevant team was in the Premiership. While the Premiership formed its current iteration in 2013 following a merger between the Scottish Premier League and the Scottish Football League, twelve teams have competed in the top-flight since 2000-01.",
