@@ -2,6 +2,7 @@
 
 library(gt)
 library(gtExtras)
+library(tidyverse)
 
 
 spfl_table_gt <-
