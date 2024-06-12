@@ -22,7 +22,9 @@ The table is built from three scripts run in sequence, although the first can be
 
 2.  `01_spfl_collect_data.R`: Wrangling the data, and calculating summary statistics
 
-3.  `02_build_table_gt.R`: Building the table
+3.  `02_build_table_gt.R`: Building the table.
+
+Alternatively, run `quarto render posit-2024-table-comp.qmd`.
 
 [The repo with these scripts can be found here.](https://github.com/dplloyd/posit-table-comp-2024)
 
