@@ -1,5 +1,6 @@
 ---
-title: "2024 Posit Table Competition Entry"
+title: "2024 Posit Table Contest Entry"
+subtitle: "2023-24 Scottish Premiership"
 author: "Diarmuid Lloyd"
 format: 
  html:
